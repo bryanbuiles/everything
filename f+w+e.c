@@ -11,13 +11,9 @@
 int main(int c, char *v[], char **env)
 {
 	char *exePath = "/bin/ls";
-	//char *myArray[] = {NULL, NULL, NULL, NULL};
 	pid_t pid[5];
 	pid_t child;
 	int i, status;
-	//myArray[0] = v[0];
-	//myArray[1] = v[1];
-	//myArray[2] = v[2];
 
 	for (i = 0; i < 5; i++)
 	{
@@ -27,19 +23,19 @@ int main(int c, char *v[], char **env)
 			return (1);
 		}
 		if (pid[i] == 0)
-
 		{
 			child = getpid();
 			dprintf(STDOUT_FILENO, "child # %u\n", child);
-			execve(exePath, v, env);
-			printf("hola\n");
-			sleep(10);
-			exit(100 + i);
+			if (execve(exePath, v, env) == -1)
+			{
+				perror("Error:");
+				return (1);
+			}
 		}
 		else
 		{
 			waitpid(pid[i], &status, 0);
-			printf("Exit status %d\n", WEXITSTATUS(status));
+			printf("Hijo # %d\n", i);
 		}
 	}
 	return (0);
