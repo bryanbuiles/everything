@@ -11,7 +11,7 @@ int main()
     char *buffer;
     size_t bufsize = 200;
     size_t redline;
-    int wr, wy;
+    int wr;
 
     buffer = malloc(sizeof(char) * bufsize);
     if (buffer == NULL)
