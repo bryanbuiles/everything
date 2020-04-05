@@ -30,7 +30,7 @@ int main(void)
         char * const envp[] = {NULL};
 
         buffer = malloc(sizeof(char) * bufersize);
-        if (buffer == NULL)
+        if (buffer == 0)
                 return (0);
         
         printf("#cisfun$ ");
@@ -43,6 +43,7 @@ int main(void)
                 if ((pid = fork()) == -1)
                 {
                         perror("Error:");
+                        free(buffer);
 		        return (1);
                 }
                 if (pid == 0)
@@ -51,6 +52,7 @@ int main(void)
 		        if (execve(args[0], args, envp) == -1)
 		        {
 			        perror("Error:");
+                                free(buffer);
 			        return (1);
 		        }
                 }
