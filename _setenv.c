@@ -6,8 +6,11 @@
 #include <string.h>
 #include "holberton.h"
 /**
- *
- * 
+ * _setenv - set a new variable or replace if it exist when  overwrite is 1, 
+ * @name: name of the variable VAR
+ * @value: value of the variable VAR=var-value
+ * @overwrite: if VAR exist and overwrite != 0, value will be replace
+ * Return: -1 if name has and (=) equal sign, 0 on success
  */
 extern char **environ;
 
@@ -69,9 +72,8 @@ int _setenv(char *name, char *value, int overwrite)
         if (flag)
                 free(newEnv[index]);
         free(newEnv);       
-        environ = newEnv;
+        //environ = newEnv;
         return (0);
-        /** errores de valgrind, en la asignacion del nulo en linea 55, linea 62 y en el for the la impresion de newEnv[i] */
 
 }
 int main(void)
